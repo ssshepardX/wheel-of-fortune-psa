@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jackpot Spin Wheel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="game-container">
+        <!-- Logo / Başlık -->
+        <div class="header">
+            <h1 class="neon-title">JACKPOT</h1>
+            <div class="ribbon">
+                <h2 class="sub-title">SPIN WHEEL</h2>
+            </div>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-box">
+                <span>BAKİYE</span>
+                <div id="balance" class="value text-gold">0 TL</div>
+            </div>
+            <div class="stat-box">
+                <span>FREESPIN</span>
+                <div id="freespin-count" class="value text-pink">3</div>
+            </div>
+        </div>
+
+        <!-- Çark -->
+        <div class="wheel-container">
+            <div class="marker"></div>
+            <!-- Ampuller için dış çember -->
+            <div class="wheel-outer" id="wheel-outer">
+                <!-- JS ile ampuller eklenecek -->
+            </div>
+            <div class="wheel-inner">
+                <div class="wheel" id="wheel">
+                    <!-- JS ile dilimler eklenecek -->
+                </div>
+                <!-- Çarkın tam ortasındaki nokta -->
+                <div class="wheel-center"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="spin-btn" class="spin-button pulse">ÇEVİR!</button>
+        </div>
+        
+        <div id="message-box" class="message-box hidden">
+            <p id="message-text">Hoş Geldin Bonusu: 3 FREESPIN Kazandın!</p>
+        </div>
+    </div>
+
+    <!-- PSA / İflas Ekranı -->
+    <div id="psa-screen" class="hidden">
+        <div class="psa-content">
+            <h2 style="color:red; font-size: 4rem; margin-bottom: 20px; text-transform: uppercase;">İflas Ettiniz!</h2>
+            <p>Sanal kumar, beyninizin ödül mekanizmasını işte böyle hackler.</p>
+            <p>Önce kazanma hissiyle dopamin salgılatır, sonra elinizdeki her şeyi alır.</p>
+            <p>Gerçek hayatta sistem <strong>her zaman kasanın kazanması</strong> üzerine kuruludur.</p>
+            <p>İstatistiklere göre, sanal kumar oynayanların <strong>%98'i</strong> uzun vadede tüm yatırımlarını kaybetmektedir.</p>
+            <p class="highlight">Kaybettiğiniz sadece sanal bakiye değil, geleceğinizdir.</p>
+            <p style="margin-top: 30px; font-size: 1.2rem; color: #888;">SSP900 Sosyal Sorumluluk Projesi Dersi</p>
+            <button id="restart-btn" class="restart-button">TEKRAR OYNA</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
