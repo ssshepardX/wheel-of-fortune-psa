@@ -20,13 +20,13 @@ const restartBtn = document.getElementById('restart-btn');
 // Çark Dilimleri Tanımı (Görseldeki gibi değerler)
 const slices = [
     { label: "JACKPOT", color: "#00bfff", type: "jackpot", baseValue: 50000 },
-    { label: "KAZANÇ", color: "#32cd32", type: "win", baseValue: 1000 },
-    { label: "BÜYÜK KAZANÇ", color: "#ffd700", type: "win", baseValue: 1500 },
-    { label: "MAX KAZANÇ", color: "#ff8c00", type: "win", baseValue: 5000 },
+    { label: "1000", color: "#32cd32", type: "win", baseValue: 1000 },
+    { label: "1500", color: "#ffd700", type: "win", baseValue: 1500 },
+    { label: "5000", color: "#ff8c00", type: "win", baseValue: 5000 },
     { label: "İFLAS", color: "#222222", type: "bankrupt", baseValue: 0 },
-    { label: "MİNİ KAZANÇ", color: "#00bfff", type: "win", baseValue: 300 },
-    { label: "BÜYÜK KAZANÇ", color: "#32cd32", type: "win", baseValue: 2000 },
-    { label: "MİNİ KAZANÇ", color: "#ff3333", type: "win", baseValue: 500 }
+    { label: "300", color: "#00bfff", type: "win", baseValue: 300 },
+    { label: "2000", color: "#32cd32", type: "win", baseValue: 2000 },
+    { label: "500", color: "#ff3333", type: "win", baseValue: 500 }
 ];
 
 const totalSlices = slices.length;
@@ -180,11 +180,11 @@ function drawBulbs() {
 }
 
 function updateStats() {
-    balanceEl.innerText = `${balance} PUAN`;
+    balanceEl.innerText = `${balance} TL`;
     freespinEl.innerText = freeSpins;
     
     if (freeSpins === 0) {
-        spinBtn.innerText = `BAKİYE İLE ÇEVİR (-${COST_PER_SPIN} PUAN)`;
+        spinBtn.innerText = `BAKİYE İLE ÇEVİR (-${COST_PER_SPIN} TL)`;
         spinBtn.classList.remove('pulse');
     } else {
         spinBtn.innerText = "BEDAVA ÇEVİR!";
@@ -238,11 +238,11 @@ function spinWheel() {
         spinResultInfo = { type: 'bankrupt', msg: "İFLAS ETTİNİZ!", amount: 0 };
     } 
     else if (currentSpin === 1) {
-        targetSliceIndex = slices.findIndex(s => s.baseValue === 1000);
+        targetSliceIndex = slices.findIndex(s => s.label === '1000');
         spinResultInfo = { type: 'bigwin', msg: "HARİKA BAŞLANGIÇ!", amount: slices[targetSliceIndex].baseValue };
     } 
     else if (currentSpin === 2) {
-         targetSliceIndex = slices.findIndex(s => s.baseValue === 5000);
+         targetSliceIndex = slices.findIndex(s => s.label === '5000');
          spinResultInfo = { type: 'bigwin', msg: "BÜYÜK KAZANÇ!!! ŞANS YANINDA!", amount: slices[targetSliceIndex].baseValue };
     } 
     else if (currentSpin === 3 && bankruptSpin !== 3) {
@@ -253,12 +253,12 @@ function spinWheel() {
     else {
         // Yüksek bahis (1000) ama düşük kazançlar (300, 500) vererek bakiyeyi sinsice erit
         if (balance < 1500 && currentSpin < bankruptSpin - 1) {
-            targetSliceIndex = slices.findIndex(s => s.baseValue === 1500);
+            targetSliceIndex = slices.findIndex(s => s.label === '1500');
             spinResultInfo = { type: 'bigwin', msg: "MÜKEMMEL GERİ DÖNÜŞ!", amount: slices[targetSliceIndex].baseValue };
         } else {
-            let lowWinValues = [300, 500];
-            let val = lowWinValues[Math.floor(Math.random() * lowWinValues.length)];
-            targetSliceIndex = slices.findIndex(s => s.baseValue === val);
+            let lowWinLabels = ['300', '500'];
+            let label = lowWinLabels[Math.floor(Math.random() * lowWinLabels.length)];
+            targetSliceIndex = slices.findIndex(s => s.label === label);
             spinResultInfo = { type: 'win', msg: "KAZANDIN!", amount: slices[targetSliceIndex].baseValue };
         }
     }
@@ -293,7 +293,7 @@ function spinWheel() {
             triggerBankrupt();
         } else {
             playSound(spinResultInfo.type);
-            showMessage(spinResultInfo.msg);
+            showMessage(`${spinResultInfo.msg} (+${spinResultInfo.amount} TL)`);
             spinBtn.disabled = false;
         }
         
